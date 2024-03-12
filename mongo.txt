@@ -1,0 +1,4 @@
+brew services start mongodb/brew/mongodb-community
+brew services stop mongodb/brew/mongodb-community
+
+start the service before opening the compass
