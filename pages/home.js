@@ -4,6 +4,7 @@ let BookInstance = require('../models/bookinstance');
 let Genre = require('../models/genre');
 
 exports.show_home = async function (res) {
+  console.log("home page")
   let books = await Book.countDocuments({});
   let copies = await BookInstance.countDocuments({});
   let available = await BookInstance.countDocuments({status: 'Available'});

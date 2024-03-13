@@ -15,6 +15,8 @@ let Authors = require('./pages/authors');
 let BookDetails = require('./pages/book_details');
 let CreateBook = require('./pages/create_book');
 
+let author = require('./models/author');
+
 
 const mongoose = require('mongoose');
 const mongoDB = "mongodb://127.0.0.1:27017/my_library_db";
@@ -31,6 +33,23 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.json());
 
+app.get('/authors-practice', async (req,res) =>{
+  const authors = await author.find({})
+  const all_authors = authors.map((auth) =>{
+    return auth.name + " -> " + auth.lifespan
+  })
+  res.send(all_authors)
+})
+
+app.get('/author-lastname/:name', async (req,res)=>{
+  const name = req.params.name
+  console.log(name)
+
+  const query = await author.find({family_name:name}).exec();
+  
+
+  res.send(query)
+})
 
 app.get('/home', (_, res) => {
   Home.show_home(res);
